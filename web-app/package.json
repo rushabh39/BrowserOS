@@ -1,0 +1,10 @@
+{
+    "name": "browseros-web",
+    "version": "1.0.0",
+    "description": "BrowserOS - AI-Powered Browser Web Application",
+    "private": true,
+    "scripts": {
+        "start": "npx serve .",
+        "dev": "npx serve ."
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "buildCommand": "",
+    "outputDirectory": "web-app",
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/web-app/$1"
+        }
+    ]
+}

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrowserOS - AI-Powered Browser</title>
+    <meta name="description"
+        content="BrowserOS is an AI-powered browser that turns your words into actions. Chat, automate, and teach your browser.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Browser Window -->
+        <div class="browser-window">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <!-- Navigation Controls -->
+                    <div class="nav-controls">
+                        <button class="nav-btn" id="back-btn" title="Go Back" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="nav-btn" id="forward-btn" title="Go Forward" disabled>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <button class="nav-btn" id="reload-btn" title="Reload">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 4v6h-6M1 20v-6h6" />
+                                <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                            </svg>
+                        </button>
+                        <button class="nav-btn" id="home-btn" title="Home">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Address Bar -->
+                    <div class="address-bar-container">
+                        <div class="address-bar">
+                            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input type="text" id="url-input" class="url-input" placeholder="Search or enter URL..."
+                                autocomplete="off">
+                            <button class="go-btn" id="go-btn" title="Go">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toolbar-right">
+                    <!-- AI Toggle Button -->
+                    <button class="ai-toggle-btn" id="ai-toggle-btn" title="Open AI Panel">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 012 12 10 10 0 0112 2z" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                        <span class="ai-badge">AI</span>
+                    </button>
+                    <!-- Settings Button -->
+                    <button class="settings-btn" id="settings-btn" title="Settings">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <div class="tabs-container" id="tabs-container">
+                    <!-- Tabs will be added dynamically -->
+                </div>
+                <button class="new-tab-btn" id="new-tab-btn" title="New Tab">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="browser-content" id="browser-content">
+                    <!-- Welcome Page -->
+                    <div class="welcome-page" id="welcome-page">
+                        <div class="welcome-content">
+                            <div class="logo-container">
+                                <div class="logo-circle">
+                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="url(#gradient)"
+                                        stroke-width="1.5">
+                                        <defs>
+                                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#667eea" />
+                                                <stop offset="100%" style="stop-color:#764ba2" />
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 2a10 10 0 0110 10" />
+                                        <path d="M12 2a10 10 0 00-10 10" />
+                                        <circle cx="12" cy="12" r="4" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h1 class="welcome-title">BrowserOS</h1>
+                            <p class="welcome-subtitle">AI-Powered Browser - Your words become actions</p>
+
+                            <div class="search-container">
+                                <input type="text" id="home-search" class="home-search"
+                                    placeholder="Search the web or enter a URL...">
+                                <button class="home-search-btn" id="home-search-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="M21 21l-4.35-4.35" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="quick-links">
+                                <a href="#" class="quick-link" data-url="https://www.google.com">
+                                    <div class="quick-link-icon google">G</div>
+                                    <span>Google</span>
+                                </a>
+                                <a href="#" class="quick-link" data-url="https://www.youtube.com">
+                                    <div class="quick-link-icon youtube">▶</div>
+                                    <span>YouTube</span>
+                                </a>
+                                <a href="#" class="quick-link" data-url="https://www.github.com">
+                                    <div class="quick-link-icon github">⌘</div>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="#" class="quick-link" data-url="https://www.wikipedia.org">
+                                    <div class="quick-link-icon wikipedia">W</div>
+                                    <span>Wikipedia</span>
+                                </a>
+                            </div>
+
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon chat-icon">💬</div>
+                                    <h3>Chat Mode</h3>
+                                    <p>Ask questions about any webpage</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon agent-icon">🤖</div>
+                                    <h3>Agent Mode</h3>
+                                    <p>Automate tasks with natural language</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon teach-icon">📚</div>
+                                    <h3>Teach Mode</h3>
+                                    <p>Record and replay workflows</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Iframe Container -->
+                    <div class="iframe-container" id="iframe-container" style="display: none;">
+                        <iframe id="page-frame" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                            loading="lazy"></iframe>
+                        <div class="loading-overlay" id="loading-overlay">
+                            <div class="loader"></div>
+                            <span>Loading...</span>
+                        </div>
+                        <div class="error-overlay" id="error-overlay" style="display: none;">
+                            <div class="error-content">
+                                <div class="error-icon">⚠️</div>
+                                <h3>Unable to load this page</h3>
+                                <p id="error-message">This page cannot be displayed due to security restrictions.</p>
+                                <button class="open-external-btn" id="open-external-btn">Open in New Tab</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Side Panel -->
+                <div class="side-panel" id="side-panel">
+                    <div class="side-panel-header">
+                        <div class="mode-switcher">
+                            <button class="mode-btn active" data-mode="chat" title="Chat Mode">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                                </svg>
+                                <span>Chat</span>
+                            </button>
+                            <button class="mode-btn" data-mode="agent" title="Agent Mode">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                                </svg>
+                                <span>Agent</span>
+                            </button>
+                            <button class="mode-btn" data-mode="teach" title="Teach Mode">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                <span>Teach</span>
+                            </button>
+                        </div>
+                        <button class="close-panel-btn" id="close-panel-btn" title="Close Panel">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="side-panel-content">
+                        <!-- Chat Mode Content -->
+                        <div class="mode-content active" id="chat-content">
+                            <div class="chat-messages" id="chat-messages">
+                                <div class="welcome-message">
+                                    <div class="ai-avatar">🤖</div>
+                                    <div class="message-bubble ai">
+                                        <p>Hi! I'm your AI assistant. I can help you:</p>
+                                        <ul>
+                                            <li>Answer questions about the current page</li>
+                                            <li>Summarize content</li>
+                                            <li>Extract information</li>
+                                            <li>Help with research</li>
+                                        </ul>
+                                        <p>How can I help you today?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agent Mode Content -->
+                        <div class="mode-content" id="agent-content">
+                            <div class="agent-status">
+                                <div class="status-indicator idle"></div>
+                                <span>Agent Ready</span>
+                            </div>
+                            <div class="agent-messages" id="agent-messages">
+                                <div class="welcome-message">
+                                    <div class="ai-avatar">🤖</div>
+                                    <div class="message-bubble ai">
+                                        <p>I'm in <strong>Agent Mode</strong>. Tell me what you want me to do and I'll
+                                            try to automate it.</p>
+                                        <p>Examples:</p>
+                                        <ul>
+                                            <li>"Click on the first link"</li>
+                                            <li>"Fill in the search box with 'AI news'"</li>
+                                            <li>"Scroll to the bottom of the page"</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Teach Mode Content -->
+                        <div class="mode-content" id="teach-content">
+                            <div class="teach-controls">
+                                <button class="record-btn" id="record-btn">
+                                    <span class="record-dot"></span>
+                                    Start Recording
+                                </button>
+                            </div>
+                            <div class="teach-messages" id="teach-messages">
+                                <div class="welcome-message">
+                                    <div class="ai-avatar">📚</div>
+                                    <div class="message-bubble ai">
+                                        <p>In <strong>Teach Mode</strong>, you can record your actions and I'll learn to
+                                            repeat them.</p>
+                                        <ol>
+                                            <li>Click "Start Recording"</li>
+                                            <li>Perform your actions on the page</li>
+                                            <li>Click "Stop Recording"</li>
+                                            <li>I'll create a workflow you can replay</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="saved-workflows" id="saved-workflows">
+                                <h4>Saved Workflows</h4>
+                                <p class="no-workflows">No saved workflows yet</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="side-panel-footer">
+                        <div class="input-container">
+                            <textarea id="chat-input" placeholder="Ask me anything..." rows="1"></textarea>
+                            <button class="send-btn" id="send-btn" title="Send">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13" />
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="model-selector">
+                            <select id="model-select">
+                                <option value="gemini">Gemini 2.5 Flash</option>
+                                <option value="openai">GPT-4.1</option>
+                                <option value="claude">Claude Sonnet</option>
+                                <option value="ollama">Ollama (Local)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal-overlay" id="settings-modal" style="display: none;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button class="modal-close-btn" id="settings-close-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="settings-tabs">
+                        <button class="settings-tab active" data-tab="llm">LLM Providers</button>
+                        <button class="settings-tab" data-tab="general">General</button>
+                    </div>
+
+                    <div class="settings-panel active" id="llm-settings">
+                        <div class="provider-section">
+                            <h3>
+                                <span class="provider-icon">✨</span>
+                                Google Gemini
+                                <span class="recommended-badge">Recommended</span>
+                            </h3>
+                            <p class="provider-desc">Free tier: 20 requests/minute</p>
+                            <div class="input-group">
+                                <label for="gemini-key">API Key</label>
+                                <input type="password" id="gemini-key" placeholder="Enter your Gemini API key">
+                                <a href="https://aistudio.google.com/apikey" target="_blank" class="get-key-link">Get
+                                    free key →</a>
+                            </div>
+                            <div class="input-group">
+                                <label for="gemini-model">Model</label>
+                                <select id="gemini-model">
+                                    <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                                    <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                                    <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="provider-section">
+                            <h3>
+                                <span class="provider-icon">🤖</span>
+                                OpenAI
+                            </h3>
+                            <div class="input-group">
+                                <label for="openai-key">API Key</label>
+                                <input type="password" id="openai-key" placeholder="Enter your OpenAI API key">
+                            </div>
+                            <div class="input-group">
+                                <label for="openai-model">Model</label>
+                                <select id="openai-model">
+                                    <option value="gpt-4.1">GPT-4.1</option>
+                                    <option value="gpt-4o">GPT-4o</option>
+                                    <option value="gpt-4o-mini">GPT-4o Mini</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="provider-section">
+                            <h3>
+                                <span class="provider-icon">🎭</span>
+                                Anthropic Claude
+                            </h3>
+                            <div class="input-group">
+                                <label for="claude-key">API Key</label>
+                                <input type="password" id="claude-key" placeholder="Enter your Claude API key">
+                            </div>
+                            <div class="input-group">
+                                <label for="claude-model">Model</label>
+                                <select id="claude-model">
+                                    <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option>
+                                    <option value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet</option>
+                                    <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="provider-section">
+                            <h3>
+                                <span class="provider-icon">🦙</span>
+                                Ollama (Local)
+                            </h3>
+                            <p class="provider-desc">Run models locally with Ollama</p>
+                            <div class="input-group">
+                                <label for="ollama-endpoint">Endpoint</label>
+                                <input type="text" id="ollama-endpoint" placeholder="http://localhost:11434"
+                                    value="http://localhost:11434">
+                            </div>
+                            <div class="input-group">
+                                <label for="ollama-model">Model</label>
+                                <input type="text" id="ollama-model" placeholder="llama3.2" value="llama3.2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-panel" id="general-settings">
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="dark-mode" checked>
+                                Dark Mode
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="auto-summarize">
+                                Auto-summarize pages
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label for="default-provider">Default LLM Provider</label>
+                            <select id="default-provider">
+                                <option value="gemini">Gemini</option>
+                                <option value="openai">OpenAI</option>
+                                <option value="claude">Claude</option>
+                                <option value="ollama">Ollama</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="save-settings-btn" id="save-settings-btn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/llm-providers.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/browser.js"></script>
+    <script src="js/side-panel.js"></script>
+    <script src="js/agent.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
